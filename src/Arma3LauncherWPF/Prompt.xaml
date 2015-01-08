@@ -1,0 +1,18 @@
+﻿<Window x:Uid="Window_1" x:Class="Arma3LauncherWPF.Prompt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:Arma3LauncherWPF.Properties"
+        Title="Prompt"  WindowStyle="ToolWindow" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+
+    <Grid x:Uid="Grid_1" Width="200" Height="60">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Uid="RowDefinition_1" Height="Auto"></RowDefinition>
+            <RowDefinition x:Uid="RowDefinition_2" Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBox x:Uid="ResponseTextBox" x:Name="ResponseTextBox" Margin="5" />
+        <StackPanel x:Uid="StackPanel_1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Uid="Button_1" Content="{x:Static res:Resources.OK}" Click="OKButton_Click" Margin="5, 0" />
+            <Button x:Uid="Button_2" Content="{x:Static res:Resources.Cancel}" Click="CancelButton_Click"  Margin="5, 0"/>
+        </StackPanel>
+    </Grid>
+</Window>

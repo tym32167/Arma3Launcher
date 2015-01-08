@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModInfoServer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Mods>
+    <ModInfo>
+      <Name>@CBA_A3</Name>
+      <FileName>@CBA_A3.zip</FileName>
+      <Url>ftp://amuradov.no-ip.biz/@CBA_A3.zip</Url>
+      <ModDate>2014-04-24T15:18:46.6921368+04:00</ModDate>
+    </ModInfo>
+    <ModInfo>
+      <Name>@Blastcore-A3</Name>
+      <FileName>@Blastcore-A3.zip</FileName>
+      <Url>ftp://amuradov.no-ip.biz/@Blastcore-A3.zip</Url>
+      <ModDate>2014-04-26T17:08:46.6921368+04:00</ModDate>
+    </ModInfo>
+    <ModInfo>
+      <Name>@VTS_Weaponresting</Name>
+      <FileName>@VTS_Weaponresting.zip</FileName>
+      <Url>ftp://amuradov.no-ip.biz/@VTS_Weaponresting_v05.7z</Url>
+      <ModDate>2014-04-26T17:08:46.6921368+04:00</ModDate>
+    </ModInfo>
+    <ModInfo>
+      <Name>@C17A3</Name>
+      <FileName>@C17A3.zip</FileName>
+      <Url>ftp://amuradov.no-ip.biz/@C17A3.zip</Url>
+      <ModDate>2014-04-24T21:56:46.6921368+04:00</ModDate>
+    </ModInfo>
+    <ModInfo>
+      <Name>@mas</Name>
+      <FileName>@mas.zip</FileName>
+      <Url>ftp://amuradov.no-ip.biz/@mas.zip</Url>
+      <ModDate>2014-04-24T08:50:46.6921368+04:00</ModDate>
+    </ModInfo>
+    <ModInfo>
+      <Name>@JSRS2.1</Name>
+      <FileName>@JSRS2.1.zip</FileName>
+      <Url>ftp://amuradov.no-ip.biz/@JSRS2.1.zip</Url>
+      <ModDate>2014-04-26T16:40:46.6921368+04:00</ModDate>
+    </ModInfo>
+  </Mods>
+  <Profiles>    
+    <Profile>
+      <ProfileName>Russian War #2</ProfileName>
+      <Mods>
+        <ProfileModInfo>
+          <Name>@mas</Name>
+        </ProfileModInfo>
+       
+        <ProfileModInfo>
+          <Name>@VTS_Weaponresting</Name>
+        </ProfileModInfo>
+       
+      </Mods>
+    </Profile>   
+
+    
+
+  </Profiles>
+</ModInfoServer>

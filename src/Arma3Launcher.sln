@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arma3LauncherWPF", "Arma3LauncherWPF\Arma3LauncherWPF.csproj", "{5C20438E-A891-4CA2-B537-CDC7DA83C0BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{E246643F-BC5C-4568-BEC6-ABAEB7D99302}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\server.xml = Samples\server.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "http", "http", "{E9D2E006-EA30-4FCD-BBA6-D7701B242A7A}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\http\server.xml = Samples\http\server.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ftp", "ftp", "{B8457210-D72A-4B0B-B9F8-A1FE3317944E}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\ftp\server.xml = Samples\ftp\server.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C20438E-A891-4CA2-B537-CDC7DA83C0BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C20438E-A891-4CA2-B537-CDC7DA83C0BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C20438E-A891-4CA2-B537-CDC7DA83C0BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C20438E-A891-4CA2-B537-CDC7DA83C0BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E9D2E006-EA30-4FCD-BBA6-D7701B242A7A} = {E246643F-BC5C-4568-BEC6-ABAEB7D99302}
+		{B8457210-D72A-4B0B-B9F8-A1FE3317944E} = {E246643F-BC5C-4568-BEC6-ABAEB7D99302}
+	EndGlobalSection
+EndGlobal
