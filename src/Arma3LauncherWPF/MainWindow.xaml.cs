@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -9,8 +9,11 @@ using Arma3LauncherWPF.ViewModel;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.Forms.MessageBox;
 using Path = System.IO.Path;
+using System.Security.Cryptography;
+using System.IO; 
 
 namespace Arma3LauncherWPF
+
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -38,7 +41,26 @@ namespace Arma3LauncherWPF
 
             
         }
-
+        Guid GetHashString(string path)
+        {
+            //переводим строку в байт-массим 
+ 
+            FileStream flStream = File.OpenRead(path);
+            byte[] bytes = new byte[flStream.Length]; //Encoding.Unicode.GetBytes(s);
+            flStream.Read(bytes, 0, (int)flStream.Length);
+            //создаем объект для получения средст шифрования  
+            MD5CryptoServiceProvider CSP =
+                new MD5CryptoServiceProvider();
+            //вычисляем хеш-представление в байтах  
+            byte[] byteHash = CSP.ComputeHash(bytes);
+            string hash = string.Empty;
+            //формируем одну цельную строку из массива  
+            foreach (byte b in byteHash)
+                hash += string.Format("{0:x2}", b);
+            return new Guid(hash);
+        }
+ 
+        private void buttonEquals_Click(object sender, EventArgs e)
         protected override void OnStateChanged(EventArgs e)
         {
             base.OnStateChanged(e);
@@ -66,6 +88,18 @@ namespace Arma3LauncherWPF
                         MessageBox.Show(Properties.Resources.Incorrect_File,Properties.Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         LoadFilePathCkeck();
                     }
+                        
+        {
+            // берем файл с САЙТА
+            string usingPath = ("http://saite.ru/tester.exe");
+ 
+            
+            //сравниваем их хеш. 
+            if (GetHashString(defaultPath).ToString() == GetHashString(usingPath).ToString())
+                MessageBox.Show("OK");
+            else
+                MessageBox.Show("Error");
+        }
                     else
                     {
                         AppSettingsHelper.ArmaFilePath = file;
