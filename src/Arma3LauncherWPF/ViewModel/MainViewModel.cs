@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using Arma3LauncherWPF.Config;
@@ -28,7 +29,7 @@ namespace Arma3LauncherWPF.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private SettingsDto.Profile _currentProfile;
-        
+
 
         internal readonly Settings _settings;
         private readonly ServerSettings _serverSettings;
@@ -39,7 +40,7 @@ namespace Arma3LauncherWPF.ViewModel
         /// </summary>
         public MainViewModel()
         {
-        
+
             _log = new Log();
             _serverSettings = new ServerSettings(_log);
             _settings = new Settings(_log, _serverSettings);
@@ -63,7 +64,7 @@ namespace Arma3LauncherWPF.ViewModel
                     result.AddRange(_settings.Instance.Profiles);
                     result.AddRange(_serverSettings.AvailibleProfiles.Select(x => new SettingsDto.Profile()
                     {
-                        Mods = x.Mods.Select(y => new SettingsDto.ModInfo() {ModName = y.Name}).ToList(),
+                        Mods = x.Mods.Select(y => new SettingsDto.ModInfo() { ModName = y.Name }).ToList(),
                         ProfileName = x.ProfileName,
                         CanDelete = false,
                         CanEdit = false,
@@ -115,7 +116,7 @@ namespace Arma3LauncherWPF.ViewModel
                             x =>
                                 new ModInfoAdv(_settings, _serverSettings)
                                 {
-                                    ModInfo = new SettingsDto.ModInfo() {ModName = x},
+                                    ModInfo = new SettingsDto.ModInfo() { ModName = x },
                                     IsChecked = CurrentProfile.Mods.Any(y => y.ModName == x)
                                 })
                         .ToList();
@@ -140,7 +141,7 @@ namespace Arma3LauncherWPF.ViewModel
 
             RaisePropertyChanged("Profiles");
             CurrentProfile = LoadCurrentProfile();
-            
+
             RaisePropertyChanged("");
         }
 
@@ -158,7 +159,7 @@ namespace Arma3LauncherWPF.ViewModel
                     _profiles = null;
                     RaisePropertyChanged("Profiles");
                     CurrentProfile = def;
-                    
+
                 }
             }
         }
@@ -183,7 +184,7 @@ namespace Arma3LauncherWPF.ViewModel
                 _profiles = null;
                 RaisePropertyChanged("Profiles");
                 CurrentProfile = LoadCurrentProfile();
-                
+
             }
         }
 
@@ -196,6 +197,13 @@ namespace Arma3LauncherWPF.ViewModel
         {
             Save();
             var args = string.Empty;
+
+            var path = AppSettingsHelper.ArmaFilePath;
+            var filename = Path.GetFileName(path);
+
+            if (!string.IsNullOrEmpty(filename) && string.Compare(filename.ToLower(), "arma3battleye.exe".ToLower(),
+                    StringComparison.InvariantCultureIgnoreCase) == 0)
+                args += " 0 1 ";
 
             args += " -mod=";
 
@@ -212,11 +220,11 @@ namespace Arma3LauncherWPF.ViewModel
             if (SettingsDto.MaxVRAM) args += string.Format(" -maxVRAM={0} ", SettingsDto.MaxVRAMInt);
             if (SettingsDto.CPUCount) args += string.Format(" -cpuCount={0} ", SettingsDto.CPUCountInt);
             if (SettingsDto.ExtraThreads) args += string.Format(" -exThreads={0} ", SettingsDto.ExtraThreadsInt);
-            
+
             _log.Info(string.Format("run with args {0}", args));
             //MessageBox.Show(args);
 
-            var path = AppSettingsHelper.ArmaFilePath;
+
             if (!string.IsNullOrEmpty(path))
                 Process.Start(new ProcessStartInfo()
                 {
@@ -230,7 +238,7 @@ namespace Arma3LauncherWPF.ViewModel
             var progress = new Progress();
             progress.Owner = owner;
             progress.Title = string.Format(Properties.Resources.Download_Mod_Text_Template, mod.ModInfo.ModName);
-           
+
 
             var modDownloader = new ModDownloader(_log, _serverSettings, progress);
             var modInstaller = new ModInstaller(_log, _settings, _serverSettings, modDownloader);
@@ -240,7 +248,7 @@ namespace Arma3LauncherWPF.ViewModel
             progress.Show();
             await modInstaller.InstallModAsync(mod.ModInfo.ModName);
             progress.Close();
-            
+
             _modsForProfile = null;
             RaisePropertyChanged("ModsForProfile");
         }
@@ -271,10 +279,10 @@ namespace Arma3LauncherWPF.ViewModel
 
             var dpn = CurrentProfile.ProfileName;
             modInstaller.RemoveMod(modInfoAdv.ModInfo.ModName);
-            
+
             _settings.Instance.DefaultProfileName = dpn;
             CurrentProfile = LoadCurrentProfile();
-            
+
             Refresh();
         }
 
@@ -290,7 +298,7 @@ namespace Arma3LauncherWPF.ViewModel
 
         public void UpdateAll(Window getWindow)
         {
-            var mods = ModsForProfile.Where(x =>x.CanUpdate);
+            var mods = ModsForProfile.Where(x => x.CanUpdate);
             foreach (var modInfoAdv in mods)
             {
                 UpdateMod(modInfoAdv, getWindow);
@@ -349,6 +357,13 @@ namespace Arma3LauncherWPF.ViewModel
             Save();
             var args = string.Empty;
 
+            var path = AppSettingsHelper.ArmaFilePath;
+            var filename = Path.GetFileName(path);
+
+            if (!string.IsNullOrEmpty(filename) && string.Compare(filename.ToLower(), "arma3battleye.exe".ToLower(),
+                    StringComparison.InvariantCultureIgnoreCase) == 0)
+                args += " 0 1 ";
+
             args += " -mod=";
 
             args = CurrentProfile.Mods.Aggregate(args, (current, modInfo) => current + (modInfo.ModName + ";"));
@@ -375,13 +390,12 @@ namespace Arma3LauncherWPF.ViewModel
                     if (!string.IsNullOrEmpty(addr.Port)) args += string.Format(" -port={0} ", addr.Port);
                     if (!string.IsNullOrEmpty(addr.Password)) args += string.Format(" -password={0} ", addr.Password);
                 }
-                
+
             }
 
             _log.Info(string.Format("connect with args {0}", args));
             //MessageBox.Show(args);
-
-            var path = AppSettingsHelper.ArmaFilePath;
+            
             if (!string.IsNullOrEmpty(path))
                 Process.Start(new ProcessStartInfo()
                 {
