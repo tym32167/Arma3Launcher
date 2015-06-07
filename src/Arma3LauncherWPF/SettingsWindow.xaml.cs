@@ -42,8 +42,7 @@ namespace Arma3LauncherWPF
 
         private bool CheckFilePath(string path)
         {
-            return !string.IsNullOrEmpty(path) && File.Exists(path) &&
-                   System.String.Compare(System.IO.Path.GetFileName(path).ToLower(), "arma3.exe".ToLower(), System.StringComparison.Ordinal) == 0;
+            return !string.IsNullOrEmpty(path) && File.Exists(path);
         }
 
         public class SettingsWindowViewModel : ViewModelBase
